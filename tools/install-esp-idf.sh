@@ -11,16 +11,20 @@ fi
 # CLONE ESP-IDF
 #
 
-if [ -z "$IDF_PATH" ]; then
-	echo "ESP-IDF is not installed! Installing local copy"
+if [ ! -d "$IDF_PATH" ]; then
+	echo "ESP-IDF is not installed! Installing local copy from $IDF_REPO_URL branch $IDF_BRANCH"
 	idf_was_installed="1"
 	if ! [ -d esp-idf ]; then
 		git clone $IDF_REPO_URL -b $IDF_BRANCH
 	fi
 	export IDF_PATH="$AR_ROOT/esp-idf"
+else
+	echo "ESP-IDF is installed in $IDF_PATH"
 fi
 
+
 if [ "$IDF_COMMIT" ]; then
+	echo "IDF_COMMIT set to $IDF_COMMIT"
     git -C "$IDF_PATH" checkout "$IDF_COMMIT"
     commit_predefined="1"
 fi
