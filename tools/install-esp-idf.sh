@@ -97,7 +97,8 @@ fi
 #
 
 if [ -x $idf_was_installed ]; then
-	git -C $IDF_PATH fetch origin && git -C $IDF_PATH pull origin $IDF_BRANCH
+	git -C $IDF_PATH fetch origin && git -C $IDF_PATH checkout $IDF_BRANCH
+#	git -C $IDF_PATH fetch origin && git -C $IDF_PATH pull origin $IDF_BRANCH
 	git -C $IDF_PATH submodule update --init --recursive
 else
 	git -C $IDF_PATH submodule update --init --recursive
